@@ -1,96 +1,34 @@
-## Introduction
+## Binary Search Trees
 
-Thus far we have talked about two data structures: arrays and linked lists.  Let's quickly review this.
+### Objectives
 
-1. Arrays
-Remember that arrays work by storing each element a fixed distance from an initial element.  
-
-```text
-
-|'b' |'c' |'d'| ____|___ |___|
- 500  508   516   524  532 540
-```
-
-This works well for retrieving information, because by knowing that an array starts at a specific address in memory, it then knows exactly where an element at a specific index lives.  With a sorted array, one can employ binary search to determine if an element is included in the array in big o log(n) time.
-
-More costly is adding or removing an element to the beginning of an array.  To add an element to the beginning means, that each subsequent element must move down one slot, which therefore take big o (n) time.
-
-```text
-
-|'a' |'b' |'c'| 'd' |___ |___|
- 500  508  516  524  532 540
-```
-
-2. Linked Lists
-
-Linked lists are more costly for retrieval index, as each node can live at any specific address, and one must visit each node to discover where the next node lives.  Because of this, retrieval costs big o (n).  However, adding or removing elements to the beginning of the linked list can be done by only changing the node before and after the inserted node.
-is not dependent on the number of elements in the list.  For example, in the diagram below we insert a node holding the string 'c' by changing what the previous node points to and changing what the inserted node points to.
-
-```text
-
-'a'  ->    'b' ->    'd'
-500        1024      35
-  1024       35
-
-
-'a' -> 'b' -> 'c' -> 'd'
-500   1024    42     35
-  1024   42     35
-```
-> To insert the node, we only had to go change the second node to point to the inserted node, and have the inserted node point to the proper subsequent node.
-
-Let's see this in a chart:
-
-Data Structure | Adding Elements | Retrieving Elements
-Arrays             BigO(n)             BigO(1)
-Linked List        BigO(1)             BigO(n)             
-
-So arrays are retrieval but not great at manipulation, while linked lists are stronger at manipulation while weaker at retrieval.  Are trees the tool that can perform with both?  But first, what is a tree?
-
-### Trees in the world
-
-Trees are a data structure that connects nodes in a parent - child relationship.  Each parent node would have a pointer and therefore know about its children.  
-
-For example, here is a family tree.
-
-```text
-      Grampa (Abe) Simpson
-              |      
-              V
-          Homer Simpson
-          |     |      |
-          V     V      V
-      Bart    Lisa    Maggie
-```
-> Simpson Family Tree
-
-In the diagram above, Grampa Simpson is a parent of Homer Simpson and Homer Simpson is a parent of Bar, Lisa and Maggie.  Each individual in the Simpson family tree is a node.  The **root node** is the only node in a tree without a parent.  Another example of a tree is an organizational chart.
-
-```text
-                                   CEO
-       |                            |                                 |
-       V                            V                                 V
-  Chief Ops Officer        Chief Finance Officer             Chief Marketing Officer
-    |             |               |         |                        |        |
-    V             V               V         V                        V        V
-  VP Human Resources    VP Operations      VP Accounting       VP Sales      VP Advertising  
-
-```
-
-In the above diagram, the CEO has a parent-child relationship with his direct reports, the Chief Operating Officer, the Chief Financial Officer and the Chief Marketing Officer.  Each of the C level people has a parent-child relationship with each one of their direct reports.  
-
-One thing that you may start noticing is that the parent child relationship can become convenient for sorting information.  For example, the tree above represents the organizational hierarchy.  Those on the same level (for example, all of the Vice Presidents) can be thought of as **siblings**.  
-
-> In a tree, siblings are nodes who share a parent node.
-
+- Learn what makes a tree a binary search tree
+- Learn how to find and insert elements into a binary search tree
+- Learn about the benefits of finding elements via a binary search tree vs arrays and linked lists.
 
 ### Binary Search Trees
 
-Let's now discuss a specific type of tree.  A binary search tree.  Binary search trees are trees where we organize the nodes such that the nodes adhere to two rules:
-  1. No parent can have more than two children (explaining the binary)
+Let's now discuss a specific type of tree: binary search trees.  Binary search trees are trees where we organize the nodes such that the nodes adhere to two rules:
+
+  1. No parent can have more than two children (thus binary)
   2. Each left child node is less than it's parent node, and each right child is more than the parent node.
 
-Let's place the following numbers in a binary search tree.  4, 1, 2, 5, 6, 3
+Let's try inserting the numbers one through six, in an increasing sequence: 1, 2, 3, 4, 5, 6.
+
+```text
+T1 T2  T3     T4       T5           T6
+
+1  1    1     1         1            1
+    2    2     2         2            2
+          3     3         3            3
+                 4         4            4
+                            5            5
+                                          6
+```
+
+The diagram above illustrates the following.  We are indicating every separate time that we insert a new node on top, with T1 as the first step, T2 as the second, and so on (T stands for time).  The root node is the first node that we begin with, the number 1.  In T2, because 2 is larger than 1, we place it to the right.  Then we take the number 3.  Three is larger than 1, so we place it on the branch to the right, but a 2 is already there.  So then we ask is 3 larger than 2, it is.  So we place 3 on the branch to the right of the 2.  Because each succeeding number is larger than all of the previous numbers, we continue to place each number one branch to the right of the previously inserted number.
+
+Note that our trees look very different if we insert them in a different order.  For example, let's place the numbers in a binary search tree but this time in the following order:  4, 1, 2, 5, 6, 3.
 
 ```text
    T1       T2     T3       T4             T5            T6
@@ -104,62 +42,43 @@ Let's place the following numbers in a binary search tree.  4, 1, 2, 5, 6, 3
                                                           3
 ```
 
-Above we illustrate the steps involved in inserting each node into a binary search tree.  WE indicate each step at the top, with T1 as the first step, T2 as the second, and so on(T stands for time).  The root node is the first node that we begin with, the number 4.  Then 1 is less than 4, so we place the number to the left.  In T3, we take the number 2.  Two is less than four, so it belongs to the left of four.  Because 1 is already to the left of four, we need to place the 2 one more level down.  Now 2 is greater than 1, so we place it to the right of the node with the number 1.  So if you look at our tree at T3, you can see that the number 2 is to the left of all of the numbers that it is smaller than, the number four.  And it is to the right of all of the numbers that it is larger than, the number 1.  Trace the subsequent steps followed at T4, T5 and T6.  
+The diagram above illustrates the steps involved in inserting each node into a binary search tree.  Here, the root node is the first node that we begin with, the number 4.  Then in T2, because 1 is less than 4, we place the number to the left.  In T3, we take the number 2.  Two is less than four, so it belongs to the left of four.  Because 1 is already to the left of four, we need to place the 2 one more level down.  Now 2 is greater than 1, so we place it to the right of the node with the number 1.  So if you look at our tree at T3, you can see that the number 2 is to the left of all of the numbers that it is smaller than, the number four.  And it is to the right of all of the numbers that it is larger than, the number 1.  Trace the subsequent steps followed at T4, T5 and T6.  
 
-Note that the same list of numbers results in a different tree, if we insert each node in a different order.
+Also note that the each of the trees above hold data in one direction: each parent node knows about it's children, but the children do not know information about their parent.  This is called a **directed tree**.  It may make more sense when we translate the tree into code in the next section.
 
-1, 2, 3, 4, 5, 6
+> A directed tree is a tree where each parent node holds a pointer to its children, but children do not know about their parent.  
 
-1  
-  2
-    3
-      4
-        5
-          6
+### Representing Binary Search Trees in Javascript
 
-So then take these same numbers and get a totally different looking tree.
+So far we know that binary search trees consist of nodes, with each node having a having a maximum of two children.  So it sounds like each node stores three pieces of information: it's own data, it's right child node, and the left child node.
 
-4, 1, 2, 5, 6, 3
-A second example - start at number 4.  So then how does 1 compare to 4.  Is 2 less than one, and then don't go to the left of one, instead go to the right.  
+```javascript
 
-Question - how do you deal with duplicates.
-What is the application of this, an org chart with people being equal.  
-Then would have to rebalance a tree. So the dom is a tree, and git is a tree, and is just a tree.
+  let node = {data: 4, rightChild: null, leftChild: null}
+```
 
-Or react it is comparing one tree to the other and making the smallest number of operations.  Hashketball you can think of as a tree.
+Let's represent the following numbers: 6, 1, 4 in a binary search tree.
 
+```javascript
+  let bst = {data: 6, 
+  				rightChild: {data: 8, leftChild: null, rightChild: null},
+      		  	leftChild: {data: 1,
+          		rightChild: {data: 4, rightChild: null, leftChild: 				null},
+			leftChild: null}
+              }}
+```
+If we deconstruct the above tree, we see that the root node is the first object, which has a pointer to a leftChild of a node with data 1.  That left child has a pointer to a right child with data 4.  So a diagram of our tree would look like:
 
+```text
+  T1   T2      T3
 
-  So now each node will need three pieces of information
-  Has a value, and each one takes it.  Point out that it's a directed graph so the parent knows about children but child does not know about parent.  
+  6     6      6
+       /      / \
+      1      1   8
+              \
+               4
+```
 
-  Know that there is nothing
-  The definition of a binary search tree, is that everything to the smaller is
-  this is a concept rather than a rule - we are using code to model these concepts.
+### Summary 
 
-  So then inserting into a binary search tree, so write this method find or add.    
-
-31 - 47 is questions
-So you have to start at the root for a bst.
-
-A.   Coding with Trees
-    1. find_or_add(4, 3)
-      true
-    2. find_or_add(4, 7)
-      root, element
-
-    So at this point in time, I am doing the same procedure
-
-B. def in_order
-In order - it is everything to the left in order followed by root node, followed by everything to the right in order.  So then if I want to place in order, then it is left subtree in order, root ,and then everything to the right in order. So this is recursion all over again.  
-
-def in_order(root_node)
-  if root_node.left
-    puts node.left
-    in_order(root_node.left)
-  end
-    root_node
-  if node.right
-    in_order(root_node.right)
-  end
-end
+In this section we learned how to structure a binary search tree.  With a binary search tree, every of the child node to the left should be less less than it's parent node, and each right child node should be more than the parent node.  We saw that we can represent a binary search tree in Javascript through the use of objects.  In the next section, we'll explore some of the benefits of structuring our data as a binary search tree, as well as how to perform functions like adding elements to our tree.
