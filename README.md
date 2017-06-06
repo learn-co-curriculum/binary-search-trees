@@ -81,4 +81,4 @@ If we deconstruct the above tree, we see that the root node is the first object,
 
 ### Summary 
 
-In this section we learned how to structure a binary search tree.  With a binary search tree, every of the child node to the left should be less less than it's parent node, and each right child node should be more than the parent node.  We saw that we can represent a binary search tree in Javascript through the use of objects.  In the next section, we'll explore some of the benefits of structuring our data as a binary search tree, as well as how to perform functions like adding elements to our tree.
+In this section we learned how to structure a binary search tree.  With a binary search tree, each child node to the left should be less than its parent node, and each child node to the right should be more than its parent node.  We saw that we can represent a binary search tree in Javascript through the use of objects.  In the next section, we'll explore some of the benefits of structuring our data as a binary search tree, as well as how to perform functions like adding elements to our tree.
