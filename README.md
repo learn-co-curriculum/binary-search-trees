@@ -63,7 +63,7 @@ Let's represent the following numbers: 6, 1, 4 in a binary search tree.
   let bst = {data: 6, 
   				rightChild: {data: 8, leftChild: null, rightChild: null},
       		  	leftChild: {data: 1,
-          		rightChild: {data: 4, rightChild: null, leftChild: 				null},
+          		rightChild: {data: 4, rightChild: null, leftChild: null},
 			leftChild: null}
               }}
 ```
@@ -82,3 +82,5 @@ If we deconstruct the above tree, we see that the root node is the first object,
 ### Summary 
 
 In this section we learned how to structure a binary search tree.  With a binary search tree, each child node to the left should be less than its parent node, and each child node to the right should be more than its parent node.  We saw that we can represent a binary search tree in Javascript through the use of objects.  In the next section, we'll explore some of the benefits of structuring our data as a binary search tree, as well as how to perform functions like adding elements to our tree.
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/binary-search-trees'>Binary Search Trees</a> on Learn.co and start learning to code for free.</p>
