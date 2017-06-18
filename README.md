@@ -19,11 +19,11 @@ Let's try inserting the numbers one through six, in an increasing sequence: 1, 2
 T1 T2  T3     T4       T5           T6
 
 1  1    1     1         1            1
-    2    2     2         2            2
-          3     3         3            3
-                 4         4            4
-                            5            5
-                                          6
+   2    2     2         2            2
+        3     3         3            3
+              4         4            4
+                        5            5
+                                     6
 ```
 
 The diagram above illustrates the following.  We are indicating every separate time that we insert a new node on top, with T1 as the first step, T2 as the second, and so on (T stands for time).  The root node is the first node that we begin with, the number 1.  In T2, because 2 is larger than 1, we place it to the right.  Then we take the number 3.  Three is larger than 1, so we place it on the branch to the right, but a 2 is already there.  So then we ask is 3 larger than 2, it is.  So we place 3 on the branch to the right of the 2.  Because each succeeding number is larger than all of the previous numbers, we continue to place each number one branch to the right of the previously inserted number.
@@ -82,3 +82,5 @@ If we deconstruct the above tree, we see that the root node is the first object,
 ### Summary 
 
 In this section we learned how to structure a binary search tree.  With a binary search tree, each child node to the left should be less than its parent node, and each child node to the right should be more than its parent node.  We saw that we can represent a binary search tree in Javascript through the use of objects.  In the next section, we'll explore some of the benefits of structuring our data as a binary search tree, as well as how to perform functions like adding elements to our tree.
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/binary-search-trees'>Binary Search Trees</a> on Learn.co and start learning to code for free.</p>
