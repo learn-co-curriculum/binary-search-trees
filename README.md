@@ -57,7 +57,7 @@ So far we know that binary search trees consist of nodes, with each node having 
   let node = {data: 4, rightChild: null, leftChild: null}
 ```
 
-Let's represent the following numbers: 6, 1, 4 in a binary search tree.
+Let's represent the following numbers: 6, 1, 4, 8 in a binary search tree.
 
 ```javascript
   let bst = {data: 6, 
