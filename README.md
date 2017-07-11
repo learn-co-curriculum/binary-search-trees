@@ -50,7 +50,7 @@ Also note that the each of the trees above hold data in one direction: each pare
 
 ### Representing Binary Search Trees in Javascript
 
-So far we know that binary search trees consist of nodes, with each node having a having a maximum of two children.  So it sounds like each node stores three pieces of information: it's own data, it's right child node, and the left child node.
+So far we know that binary search trees consist of nodes, with each node having a maximum of two children.  So it sounds like each node stores three pieces of information: it's own data, it's right child node, and the left child node.
 
 ```javascript
 
@@ -82,3 +82,5 @@ If we deconstruct the above tree, we see that the root node is the first object,
 ### Summary 
 
 In this section we learned how to structure a binary search tree.  With a binary search tree, each child node to the left should be less than its parent node, and each child node to the right should be more than its parent node.  We saw that we can represent a binary search tree in Javascript through the use of objects.  In the next section, we'll explore some of the benefits of structuring our data as a binary search tree, as well as how to perform functions like adding elements to our tree.
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/binary-search-trees'>Binary Search Trees</a> on Learn.co and start learning to code for free.</p>
