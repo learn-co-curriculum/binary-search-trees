@@ -63,7 +63,7 @@ Let's represent the following numbers: 6, 1, 4 in a binary search tree.
   let bst = {data: 6, 
   				rightChild: {data: 8, leftChild: null, rightChild: null},
       		  	leftChild: {data: 1,
-          		rightChild: {data: 4, rightChild: null, leftChild: 				null},
+          		rightChild: {data: 4, rightChild: null, leftChild: null},
 			leftChild: null}
               }}
 ```
