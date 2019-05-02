@@ -53,19 +53,27 @@ Also note that the each of the trees above hold data in one direction: each pare
 So far we know that binary search trees consist of nodes, with each node having a maximum of two children.  So it sounds like each node stores three pieces of information: it's own data, it's right child node, and the left child node.
 
 ```javascript
-
-  let node = {data: 4, rightChild: null, leftChild: null}
+class TreeNode {
+  constructor(data) {
+    this.data = data
+    this.left = null
+    this.right = null
+  }
+}
 ```
 
-Let's represent the following numbers: 6, 1, 4, 8 in a binary search tree.
+Let's represent the following numbers: 6, 1, 4, 8 in a binary search tree. We'll create each node and wire them together manually.
 
 ```javascript
-  let bst = {data: 6, 
-  				rightChild: {data: 8, leftChild: null, rightChild: null},
-      		  	leftChild: {data: 1,
-          		rightChild: {data: 4, rightChild: null, leftChild: null},
-			leftChild: null}
-              }}
+let n6 = new TreeNode(6)
+let n1 = new TreeNode(6)
+let n4 = new TreeNode(6)
+let n8 = new TreeNode(6)
+let root = n6
+
+n6.left = n1
+n1.right = n4
+n6.right = n8
 ```
 If we deconstruct the above tree, we see that the root node is the first object, which has a pointer to a leftChild of a node with data 1.  That left child has a pointer to a right child with data 4.  So a diagram of our tree would look like:
 
